@@ -1,3 +1,4 @@
+import React from "react";
 import GameLogic from "./components/game-logic/game-logic";
 
 function App() {

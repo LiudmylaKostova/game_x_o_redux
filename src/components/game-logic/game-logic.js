@@ -1,21 +1,20 @@
+import React from "react";
 import styles from "./game-logic.module.css";
 import Board from "../board/board";
-import { chooseWinner } from "../../chooseWinner";
-import { showDraw } from "../../chooseWinner";
 
 import { connect } from "react-redux";
 import * as actions from "../../redux/actions";
 
-const GameLogic = ({ board, step, resetGame, click }) => {
-  const winner = chooseWinner(board);
-  const draw = showDraw(board);
-
+export const GameLogic = ({ ...props }) => {
   let status;
-  if (winner || draw) {
-    status = "Winner is " + (winner || draw);
+
+  if (props.winner || props.draw) {
+    status = "Winner is " + (props.winner || props.draw);
     console.log(status);
+    
   } else {
-    status = "Next player: " + (step % 2 === 0 ? "X" : "0");
+    status = "Next player: " + (props.step % 2 === 0 ? "X" : "0");
+    console.log(props.step);
     console.log(status);
   }
 
@@ -23,11 +22,11 @@ const GameLogic = ({ board, step, resetGame, click }) => {
     <>
       <div className={styles.box}>
         <p className={styles.descr}>{status}</p>
-        <button className={styles.btn} onClick={resetGame}>
+        <button className={styles.btn} onClick={props.resetGame}>
           Click me
         </button>
       </div>
-      <Board cells={board} click={click} winner={winner} />
+      <Board cells={props.board} click={props.click} winner={props.winner} />
     </>
   );
 };
@@ -36,6 +35,8 @@ const mapStateToProps = (state) => {
   return {
     board: state.board,
     step: state.step,
+    winner: state.winner,
+    draw: state.draw,
   };
 };
 
