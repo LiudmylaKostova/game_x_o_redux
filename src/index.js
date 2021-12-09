@@ -4,10 +4,9 @@ import App from "./App";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 
-// const MyContext = React.createContext(null);
 
-console.log(store);
-console.log(store.getState());
+// console.log(store);
+// console.log(store.getState());
 
 ReactDOM.render(
   <React.StrictMode>
